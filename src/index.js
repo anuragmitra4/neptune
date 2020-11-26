@@ -3,11 +3,62 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { BrowserRouter } from 'react-router-dom';
+
+import 'bootstrap/dist/css/bootstrap.css';
+
+import { Provider } from 'react-redux';
+import firebase from 'firebase/app';
+import 'firebase/auth';
+import { createStore, combineReducers } from 'redux';
+import {
+  ReactReduxFirebaseProvider,
+  firebaseReducer,
+} from 'react-redux-firebase';
+import { composeWithDevTools } from 'redux-devtools-extension';
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCqOhWUCIfJJw1k0kDTHq7R_55AOntBLQ8",
+  authDomain: "h2ok-innovations.firebaseapp.com",
+  databaseURL: "https://h2ok-innovations.firebaseio.com",
+  projectId: "h2ok-innovations",
+  storageBucket: "h2ok-innovations.appspot.com",
+  messagingSenderId: "1011591021382",
+  appId: "1:1011591021382:web:fef587cc97efc136905b47",
+  measurementId: "G-X7CWWDSSZW"
+};
+
+firebase.initializeApp(firebaseConfig);
+
+// Add firebase to reducers
+const rootReducer = combineReducers({
+  firebase: firebaseReducer,
+  // firestore: firestoreReducer // <- needed if using firestore
+});
+
+// Create store with reducers and initial state
+const store = createStore(rootReducer, composeWithDevTools());
+
+// react-redux-firebase config
+const rrfConfig = {
+  userProfile: 'users',
+};
+
+const rrfProps = {
+  firebase,
+  config: rrfConfig,
+  dispatch: store.dispatch,
+  // createFirestoreInstance // <- needed if using firestore
+};
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <Provider store={store}>
+    <ReactReduxFirebaseProvider {...rrfProps}>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </ReactReduxFirebaseProvider>
+  </Provider>,
   document.getElementById('root')
 );
 

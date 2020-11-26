@@ -1,25 +1,34 @@
-import logo from './logo.svg';
 import './App.css';
+import PageLogin from './PageLogin';
+import { connect } from 'react-redux';
+import { Switch, Route } from 'react-router-dom';
+import PageRegister from './PageRegister';
+import PageHome from './PageHome';
+import { isLoaded } from 'react-redux-firebase';
 
-function App() {
+const App = props => {
+  if (!isLoaded(props.auth, props.profile)) {
+    return <div>Authentication Loading...</div>;
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Switch>
+      <Route exact path="/">
+        <PageHome /> 
+      </Route>
+      <Route exact path="/login">
+        <PageLogin />
+      </Route>
+      <Route exact path="/register">
+        <PageRegister />
+      </Route>
+      <Route>Page Not Found!</Route>
+    </Switch>
   );
 }
 
-export default App;
+const mapStateToProps = state => {
+  return { auth: state.firebase.auth, profile: state.firebase.profile };
+};
+
+export default connect(mapStateToProps)(App);
