@@ -10,12 +10,15 @@ import 'bootstrap/dist/css/bootstrap.css';
 import { Provider } from 'react-redux';
 import firebase from 'firebase/app';
 import 'firebase/auth';
+import 'firebase/functions';
+import 'firebase/firestore';
 import { createStore, combineReducers } from 'redux';
 import {
   ReactReduxFirebaseProvider,
   firebaseReducer,
 } from 'react-redux-firebase';
 import { composeWithDevTools } from 'redux-devtools-extension';
+import { createFirestoreInstance, firestoreReducer } from 'redux-firestore'
 
 const firebaseConfig = {
   apiKey: "AIzaSyCqOhWUCIfJJw1k0kDTHq7R_55AOntBLQ8",
@@ -28,12 +31,18 @@ const firebaseConfig = {
   measurementId: "G-X7CWWDSSZW"
 };
 
+export { firebaseConfig };
+
 firebase.initializeApp(firebaseConfig);
+firebase.functions().useFunctionsEmulator('http://localhost:5001');
+
+// Initialize other services on firebase instance
+firebase.firestore()
 
 // Add firebase to reducers
 const rootReducer = combineReducers({
   firebase: firebaseReducer,
-  // firestore: firestoreReducer // <- needed if using firestore
+  firestore: firestoreReducer // <- needed if using firestore
 });
 
 // Create store with reducers and initial state
@@ -48,7 +57,7 @@ const rrfProps = {
   firebase,
   config: rrfConfig,
   dispatch: store.dispatch,
-  // createFirestoreInstance // <- needed if using firestore
+  createFirestoreInstance // <- needed if using firestore
 };
 
 ReactDOM.render(

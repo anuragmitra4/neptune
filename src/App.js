@@ -5,11 +5,30 @@ import { Switch, Route } from 'react-router-dom';
 import PageRegister from './PageRegister';
 import PageHome from './PageHome';
 import { isLoaded } from 'react-redux-firebase';
+import { GridLoader } from 'react-spinners';
+import { css } from "@emotion/core";
+
+const override = css`
+  display: block;
+  margin: 0 auto;
+  border-color: red;
+`;
 
 const App = props => {
   if (!isLoaded(props.auth, props.profile)) {
-    return <div>Authentication Loading...</div>;
-  }
+    return (
+      <div style={{
+        position: 'absolute', left: '50%', top: '50%',
+        transform: 'translate(-50%, -50%)'
+      }}>
+        <GridLoader
+          css={override}
+          size={15}
+          color={"#008066"}
+          loading={true}
+        />
+      </div>
+    )}
 
   return (
     <Switch>
@@ -22,7 +41,9 @@ const App = props => {
       <Route exact path="/register">
         <PageRegister />
       </Route>
-      <Route>Page Not Found!</Route>
+      <Route>
+        <PageHome />
+      </Route>
     </Switch>
   );
 }

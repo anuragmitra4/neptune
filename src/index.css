@@ -23,100 +23,23 @@
   font-size: 20px;
 }
 
-.chat {
-  width: 80%;
-  background-color: #f7f7f7;
-  overflow: auto;
-  height: 45vh;
-}
-
-table {
+.leaflet-container {
   width: 100%;
-  word-break: break-all;
-  border-collapse: separate;
-  border-spacing: 1em;
+  height: 100vh;
 }
 
-.user-one {
-  background-color: #d4e4ff;
-  text-align: center;
-  border-radius: 15px 15px 15px 15px;
-  padding: 1%;
+h2 {
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee;
 }
 
-.user-two {
-  background-color: #95f0b4;
-  text-align: center;
-  border-radius: 15px 15px 15px 15px;
-  padding: 1%;
+.content {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 20px;
 }
 
-.user-one:hover {
-  background-color: #96c8e0;
-  transition: background-color 0.2s ease-in-out;
-}
-
-.user-two:hover {
-  background-color: #99e09f;
-  transition: background-color 0.2s ease-in-out;
-}
-
-.send-chat {
-  vertical-align: middle;
-  width: 80%;
-  height: 100%;
-}
-
-.leave {
-  margin-top: 10px;
-  float: left;
-  width: 44%;
-}
-
-.report {
-  margin-top: 10px;
-  width: 8%;
-}
-
-.reveal {
-  margin-top: 10px;
-  float: right;
-  width: 44%;
-}
-
-.update-profile {
-  width: 35%;
-}
-
-.profile {
-  margin-top: 2px;
-  margin-left: 1%;
-  margin-bottom: 2px;
-}
-
-.propic-one {
-  float: right;
-}
-
-.propic-two {
-  float: left;
-}
-.message {
-  width: 43%;
-}
-.pic {
-  width: 7%;
-}
-
-.btn-outline-info {
-  color: #e1306c;
-  background-color: transparent;
-  background-image: none;
-  border-color: #e1306c;
-}
-
-.btn-outline-info:hover {
-  color: #ffffff;
-  background-color: #e1306c;
-  border-color: #e1306c;
-}

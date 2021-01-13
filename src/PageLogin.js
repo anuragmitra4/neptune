@@ -42,7 +42,7 @@ class PageLogin extends React.Component {
           <div className="container">
             <h1>Neptune</h1>
             <p>
-              Intuitively Understand and Forecast your Water Health. 
+              Intuitively understand and forecast your water health. 
             </p>
           </div>
         </div>

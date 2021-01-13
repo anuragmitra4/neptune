@@ -17,7 +17,7 @@ class PageRegister extends React.Component {
   }
 
   handleChange = event =>
-    this.setState({ [event.target.name]: event.target.value, erroar: '' });
+    this.setState({ [event.target.name]: event.target.value, error: '' });
 
   register = async () => {
     const credentials = {
@@ -29,7 +29,6 @@ class PageRegister extends React.Component {
       name: this.state.name,
       email: this.state.email,
       phone: this.state.phone,
-      chat: [],
     };
 
     try {
@@ -48,10 +47,10 @@ class PageRegister extends React.Component {
       <div className="center">
         <div className="jumbotron jumbotron-fluid">
           <div className="container">
-            <h1>Find a Friend</h1>
+            <h1>Neptune</h1>
             <p>
-              Chat with an anonymous person from your school and reveal to make
-              friends!
+              Intuitively understand and forecast your water
+              health
             </p>
           </div>
         </div>
